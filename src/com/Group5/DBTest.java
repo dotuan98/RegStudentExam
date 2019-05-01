@@ -82,8 +82,9 @@ public class DBTest {
                 "[{\"examFrom\":\"09:00:00\", \"examTo\":\"10:30:00\", \"modId\":13}]",
                 "[]"
         };
+        String[] column = new String[] {"modId", "examFrom", "examTo", "modId1"};
         for (int i = 0; i < examDates.length; i++){
-            String result = StoredProcedure.getAllExamsOverlappedInDay(Date.valueOf(examDates[i])).toString();
+            String result = StoredProcedure.getAllExamsOverlappedInDay(Date.valueOf(examDates[i]), column).toString();
             JSONAssert.assertEquals(expectedResults[i], result, JSONCompareMode.LENIENT);
         }
     }

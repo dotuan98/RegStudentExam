@@ -1,6 +1,7 @@
 package com.Group5;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.sql.*;
 
@@ -45,7 +46,7 @@ public class StoredProcedure {
         ResultSet rs = statement.executeQuery();
         return ResultsetConverter.convertAll(rs);
     }
-
+    
     static JSONArray listParticipatedStudentsOfSession(int session_id) throws SQLException, ClassNotFoundException {
         PreparedStatement statement = initStatement("call ListParticipatedStudentsOfSession(?)");
         statement.setInt(1,session_id);
@@ -62,6 +63,9 @@ public class StoredProcedure {
         statement.executeQuery();
     }
 
+    //Modules procedures
+    
+    //Get all modules that a student attends
     static JSONArray getAllModulesStudentAttend (int student_id) throws SQLException, ClassNotFoundException{
         PreparedStatement statement = initStatement("call GetAllModulesStudentAttend(?)");
         statement.setInt(1, student_id);
@@ -69,13 +73,38 @@ public class StoredProcedure {
         return ResultsetConverter.convertAll(rs);
     }
 
-    static JSONArray getAllExamsOverlappedInDay (Date exam_date) throws SQLException, ClassNotFoundException{
-        PreparedStatement statement = initStatement("call AllExamsOverlappedInDay(?)");
-        statement.setDate(1, exam_date);
+    
+    //Get all teachers teaching a same module
+    static JSONArray getAllLecturersTeachModule (int module_id) throws SQLException, ClassNotFoundException{
+        PreparedStatement statement = initStatement("call GetAllLecturersTeachModule(?)");
+        statement.setInt(1, module_id);
         ResultSet rs = statement.executeQuery();
         return ResultsetConverter.convertAll(rs);
     }
 
-
-
+    //Get all modules in a semester
+    static JSONArray getAllModulesInSemester (int semester_id) throws SQLException, ClassNotFoundException{
+        PreparedStatement statement = initStatement("call GetAllModulesInSemester(?)");
+        statement.setInt(1, semester_id);
+        ResultSet rs = statement.executeQuery();
+        return ResultsetConverter.convertAll(rs);
+    }
+    
+    //special
+    //Get all overlapped exams in a day
+    static JSONArray getAllExamsOverlappedInDay (Date exam_date, String[] column) throws SQLException, ClassNotFoundException{
+        PreparedStatement statement = initStatement("call AllExamsOverlappedInDay(?)");
+        statement.setDate(1, exam_date);
+        ResultSet rs = statement.executeQuery();
+        return ResultsetConverter.convertAll(rs, column);
+    }
+    
+    static JSONArray checkAccountExist (String username, String password) throws SQLException, ClassNotFoundException{
+    	PreparedStatement statement = initStatement("call CheckAccountExist(?, ?)");
+        statement.setString(1, username);
+        statement.setString(2, password);
+        ResultSet rs = statement.executeQuery();
+        return ResultsetConverter.convertAll(rs);
+    }
+    
 }

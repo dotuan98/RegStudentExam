@@ -17,7 +17,7 @@ public class ResultsetConverter {
 
         for (int i = 1; i < numColumns + 1; i++) {
             String fieldName = fieldNames[i - 1];
-            String columnName = rsmd.getColumnName(i);
+            String columnName = rsmd.getColumnLabel(i);
             int columnType = rsmd.getColumnType(i);
 
             if (columnType == Types.ARRAY) {
