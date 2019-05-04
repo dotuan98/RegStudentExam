@@ -1,6 +1,7 @@
-package com.Group5;
+package com.Group5.procedures;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.sql.*;
@@ -14,12 +15,7 @@ public class StoredProcedure {
         Connection conn = DriverManager.getConnection(host, username, password);
         return conn.prepareStatement(statement);
     }
-    static JSONArray countSessionOfModule(String module_name) throws SQLException, ClassNotFoundException {
-        PreparedStatement statement = initStatement("call CountSessionOfModule(?)");
-        statement.setString(1,module_name);
-        ResultSet rs = statement.executeQuery();
-        return ResultsetConverter.convertAll(rs);
-    }
+    
     static JSONArray countStudentAttendanceOfModule(String student_name, String module_name) throws SQLException, ClassNotFoundException {
         PreparedStatement statement = initStatement("call StudentCountAttendanceOfModule(?, ?)");
         statement.setString(1,student_name);
@@ -90,6 +86,14 @@ public class StoredProcedure {
         return ResultsetConverter.convertAll(rs);
     }
     
+  //Count sessions of a module
+    static JSONArray countSessionOfModule(String module_name) throws SQLException, ClassNotFoundException {
+        PreparedStatement statement = initStatement("call CountSessionOfModule(?)");
+        statement.setString(1,module_name);
+        ResultSet rs = statement.executeQuery();
+        return ResultsetConverter.convertAll(rs);
+    }
+    
     //special
     //Get all overlapped exams in a day
     static JSONArray getAllExamsOverlappedInDay (Date exam_date, String[] column) throws SQLException, ClassNotFoundException{
@@ -103,6 +107,12 @@ public class StoredProcedure {
     	PreparedStatement statement = initStatement("call CheckAccountExist(?, ?)");
         statement.setString(1, username);
         statement.setString(2, password);
+        ResultSet rs = statement.executeQuery();
+        return ResultsetConverter.convertAll(rs);
+    }
+    
+    static JSONArray getAllStudent () throws SQLException, ClassNotFoundException {
+    	PreparedStatement statement = initStatement("call GetAllStudent()");
         ResultSet rs = statement.executeQuery();
         return ResultsetConverter.convertAll(rs);
     }

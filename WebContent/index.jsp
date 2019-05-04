@@ -8,13 +8,11 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		
-		$('#bttHello').click(function(){
-			var fullname = $('#fullname').val();
+		$('#bttGetAllStudent').click(function(){
 			$.ajax({
-				type:'POST',
+				type:'GET',
 				data: {
-					fullname: fullname,
-					action: "demo1"
+					action: "getAllStudent"
 				},
 				url:'ModuleResources',
 				success: function(result){
@@ -66,36 +64,33 @@
 					action: "login"
 				},
 				url:'ModuleResources',
-				success: function(result){
-					$('#result4').html(result);
-				}
+				success: createTable
 			})
 		})
 	});
+</script>
+<script>
+function createTable(result) {
+  var table = document.getElementById("myTable");
+  var row = table.insertRow(0);
+  var cell1 = row.insertCell(0);
+  var cell2 = row.insertCell(1);
+  cell1.innerHTML = "NEW CELL1";
+  cell2.innerHTML = "NEW CELL2";
+}
 </script>
 </head>
 <body>
 
 <fieldset>
-	<legend>Demo 1</legend>
+	<legend>Get all students</legend>
 	<form>
-	Name <input type = "text" id ="fullname">
-	<input type="button" value="Hello" id="bttHello">
+	<input type="button" value="Get" id="bttGetAllStudent">
 	<br>
 	<span id="result1"></span> 
 </form>
 </fieldset>
 
-<fieldset>
-	<legend>Demo 2</legend>
-	<form>
-	Number 1 <input type = "text" id ="number1"><br>
-	Number 2 <input type = "text" id ="number2"><br>
-	Result <span id="result2"></span><br>
-	<input type="button" value="Sum" id="bttSum"><br>
-	
-</form>
-</fieldset> 
 
 <fieldset>
 <form>

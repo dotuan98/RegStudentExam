@@ -101,6 +101,7 @@
             <artifactId>jsonassert</artifactId>
             <version>1.5.0</version>
         </dependency>
+        
     </dependencies>
   <build>
         <sourceDirectory>src</sourceDirectory>
