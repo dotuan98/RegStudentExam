@@ -1,5 +1,4 @@
 package com.Group5.procedures;
-import java.sql.SQLException;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -7,12 +6,8 @@ import javax.ws.rs.Path;
 
 public class Hello {
 	@GET
-	public String hello() throws ClassNotFoundException, SQLException {
-		if (StoredProcedure.checkAccountExist("tuan", "123456") != null) {
-			return "true";
-		} else {
-			return "Hello";
-		}
-		
+	public String hello() {
+		return "hello";
+		//return StoredProcedure.getAllModulesStudentAttend(1).toString();
 	}
 }

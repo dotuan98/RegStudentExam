@@ -10,16 +10,15 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.IOException;
 import java.sql.SQLException;
 
 
-@Path("/view/modules/")
+//@Path("/view/modules")
 public class Modules{
 
-    @POST
+    @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response doPost() throws SQLException, ClassNotFoundException {
+    public Response doGet() throws SQLException, ClassNotFoundException {
         JSONArray modules = Module.getAllModulesStudentAttend(1);
         return Response.ok(modules.toString()).build();
     }

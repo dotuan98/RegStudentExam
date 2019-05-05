@@ -4,19 +4,21 @@ import java.io.IOException;
 import java.io.PrintWriter;
 //import java.sql.Date;
 import java.sql.SQLException;
-
+/*
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.Path;
-//import org.json.JSONArray;
-@Path("/module")
-@WebServlet("/ModuleResources")
-//import org.json.JSONArray;
+import javax.ws.rs.Path;*/
 
 
+//import org.json.JSONArray;
+//@Path("/module")
+//@WebServlet("/ModuleResources")
+//import org.json.JSONArray;
+
+/*
 public class ModuleResources extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -90,7 +92,9 @@ public class ModuleResources extends HttpServlet {
 	    return StoredProcedure.getAllModulesInSemester(semester_id).toString();
 	}*/
 	
+//}
+public class ModuleResources{
+	
 }
-
 
 
