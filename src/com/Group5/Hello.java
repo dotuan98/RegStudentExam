@@ -1,18 +1,13 @@
 package com.Group5;
 import java.sql.SQLException;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-@Path("/hello")
+import javax.ws.rs.*;
+import javax.ws.rs.core.*;
 
+@Path("/hello")
 public class Hello {
 	@GET
-	public String hello() throws ClassNotFoundException, SQLException {
-		if (StoredProcedure.checkAccountExist("tuan", "123456") != null) {
-			return "true";
-		} else {
-			return "Hello";
-		}
-		
+	public Response hello() {
+		return Response.ok("HOOLOS").build();
 	}
 }
