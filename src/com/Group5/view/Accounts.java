@@ -14,14 +14,8 @@ import org.json.JSONArray;
 import com.Group5.procedures.Account;
 import com.Group5.procedures.Module;
 
-@Path("/view/accounts")
+@Path("/assisstant")
 public class Accounts {
-	@GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response doPost() throws SQLException, ClassNotFoundException {
-        JSONArray modules = Module.getAllModulesStudentAttend(1);
-        return Response.ok(modules.toString()).build();
-    }
 	
 	@Path("/students")
 	@POST
@@ -30,4 +24,6 @@ public class Accounts {
         JSONArray modules = Account.getAllStudent();
         return Response.ok(modules.toString()).build();
     }
+	
+
 }
