@@ -1,4 +1,4 @@
-package com.Group5.procedures;
+package test;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -49,6 +49,23 @@ public class Session {
         statement.executeQuery();
     }
     
+    
+    //List all participated students of a session
+    public static void listParticipatedStudentsOfSession( int ses_id) throws SQLException, ClassNotFoundException {
+        PreparedStatement statement = initStatement("CALL ListParticipatedStudentsOfSession(?)");
+        statement.setInt(1, ses_id);
+        statement.executeQuery();
+    }
+    
+    //List all absent students of a session
+    public static void listAbsentStudentsOfSession( int ses_id) throws SQLException, ClassNotFoundException {
+        PreparedStatement statement = initStatement("CALL ListAbsentStudentsOfSession(?)");
+        statement.setInt(1, ses_id);
+        statement.executeQuery();
+    }
+    
+    
+    
     // ------------------ Module - Session ------------------
     
     //Get all sessions of a module
