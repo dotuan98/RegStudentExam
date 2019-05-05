@@ -16,12 +16,11 @@ import com.Group5.procedures.Module;
 
 @Path("/assisstant")
 public class Accounts {
-	
-	@Path("/students")
-	@POST
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getAllStudents() throws SQLException, ClassNotFoundException {
-        JSONArray modules = Account.getAllStudent();
+
+	@GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response doPost() throws SQLException, ClassNotFoundException {
+        JSONArray modules = Module.getAllModulesStudentAttend(1);
         return Response.ok(modules.toString()).build();
     }
 	
