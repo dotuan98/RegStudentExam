@@ -16,6 +16,7 @@ import com.Group5.procedures.Module;
 
 @Path("/view/accounts")
 public class Accounts {
+
 	@GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response doPost() throws SQLException, ClassNotFoundException {

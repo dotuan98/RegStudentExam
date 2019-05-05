@@ -7,6 +7,19 @@
   <display-name>RegStudentExam</display-name>
   
   <servlet>
+        <servlet-name>StaticFileServlet</servlet-name>
+        <servlet-class>org.apache.catalina.servlets.DefaultServlet</servlet-class>
+        <init-param>
+            <param-name>resourceBase</param-name>
+            <param-value>WebContent</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StaticFileServlet</servlet-name>
+        <url-pattern>/html/*</url-pattern>
+    </servlet-mapping>
+  
+  <servlet>
     <servlet-name>RegStudentExam</servlet-name>
     <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
     <init-param>
