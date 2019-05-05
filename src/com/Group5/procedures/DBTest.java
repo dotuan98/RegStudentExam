@@ -1,4 +1,4 @@
-package com.Group5;
+package com.Group5.procedures;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

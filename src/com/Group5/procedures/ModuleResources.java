@@ -1,27 +1,24 @@
-package com.Group5;
+package com.Group5.procedures;
 
-//import java.sql.Date;
-import java.sql.SQLException;
-import com.Group5.StoredProcedure;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
 import java.io.IOException;
 import java.io.PrintWriter;
-
+//import java.sql.Date;
+import java.sql.SQLException;
+/*
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-//import org.json.JSONArray;
-@Path("/module")
-@WebServlet("/ModuleResources")
-//import org.json.JSONArray;
+import javax.ws.rs.Path;*/
 
 
+//import org.json.JSONArray;
+//@Path("/module")
+//@WebServlet("/ModuleResources")
+//import org.json.JSONArray;
+
+/*
 public class ModuleResources extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -34,7 +31,7 @@ public class ModuleResources extends HttpServlet {
 		response.setContentType("text/plain");
 		PrintWriter out = response.getWriter();
 		String action = request.getParameter("action");
-		if (action.equals("demo1")) {
+		if (action.equals("getAllStudent")) {
 			String fullname = request.getParameter("fullname");
 			out.print("Hello " + fullname);
 		} else if (action.equals("demo2")) {
@@ -95,7 +92,9 @@ public class ModuleResources extends HttpServlet {
 	    return StoredProcedure.getAllModulesInSemester(semester_id).toString();
 	}*/
 	
+//}
+public class ModuleResources{
+	
 }
-
 
 

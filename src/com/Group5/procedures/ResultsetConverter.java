@@ -1,9 +1,12 @@
-package com.Group5;
+package com.Group5.procedures;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -92,4 +95,12 @@ public class ResultsetConverter {
         return fieldNames;
     }
 
+    static PreparedStatement initStatement (String statement) throws SQLException, ClassNotFoundException{
+    	Class.forName("com.mysql.jdbc.Driver"); 
+        String host="jdbc:mysql://localhost:3306/vgu1";
+        String username="root";
+        String password="123456";
+        Connection conn = DriverManager.getConnection(host, username, password);
+        return conn.prepareStatement(statement);
+    }
 }
