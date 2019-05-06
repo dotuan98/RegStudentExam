@@ -5,24 +5,40 @@ $(function(){
         type: 'GET',
         url:'/RegStudentExam/view/list_modules_of_student',
         success: function(modules) {
-        	for (var i = 0; i < modules.length; i++) {
-        		$enrolledModules.append('<li>' + module.name + '</li>'
-        				+'<li><table id="module' + module.modId + '"></table></li>');
+        	Promise.all(
+        		modules.map((module) => {
+        			return new Promise((resolve) => {       				
+            			$.ajax({
+            				type: 'GET',
+            				url: '/RegStudentExam/view/check_student_attendances_of_module/' + module.modId,
+            				success: (sessions) => {
+            					resolve({
+            						module: module,
+            						sessions: sessions
+            					})
+            				}
+            			});
+        			})
+        		})
+        	)
+        	.then((array) => {
+        		for (let i = 0; i < array.length; i++) {
+        			$enrolledModules.append('<li>'+ array[i].module.name +'</li>');
         	
-                $.ajax({
-                	type: 'GET',
-                	url: '/RegStudentExam/view/check_student_attendances_of_module/' + module.modId,
-                	success: function(sessions) {
-                		$('#module' + module.modId).append('<li><table>'
-                				+ '<tr><th>' + module.modId + '</th></tr>'
-                				+'</table></li>');
-                	}
-                });
-            //$.each(modules, function(i, module) {
-        	};
+        			for (let j = 0; j < array[i].sessions.length; j++) {
+        				$enrolledModules.append(array[i].sessions[j].sesDate + ": "
+        						+ array[i].sessions[j].stuId + '<br/>');
+        			}
+        			
+        		}
+        	})
         }
     });
 });
+
+function x(sessions) {
+	
+}
   
 
 /*OLD VERSION

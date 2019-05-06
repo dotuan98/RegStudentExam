@@ -21,7 +21,7 @@ public class CheckStudentAttendancesOfModule {
 	@GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response doPost(@PathParam("id") int moduleID) throws SQLException, ClassNotFoundException {
-        JSONArray modules = Module.checkStudentAttendancesofModule(1, moduleID);
+        JSONArray modules = Module.checkStudentAttendancesofModule(3, moduleID);
         return Response.ok(modules.toString()).build();
     }
 }
