@@ -110,7 +110,7 @@ create table EXAM(
     unique(modId, examDate),
     primary key(examId)
 );
-
+/*
 create table SIGN(
     sesId int NOT NULL,
     stuId int,
@@ -121,11 +121,36 @@ create table SIGN(
     primary key(signId),
     unique(sesId, stuId)
 );
+*/
 
+create table SIGN(
+    sesId int NOT NULL,
+    stuId int,
+    signTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    signId int NOT NULL AUTO_INCREMENT,
+    foreign key(stuId) references STUDENT(stuId) ON DELETE CASCADE,
+    foreign key(sesId) references SESSION(sesId) ON DELETE CASCADE,
+    primary key(signId),
+    unique(sesId, stuId)
+);
+
+/*
 create table REG(
     examId int NOT NULL,
     stuId int,
     regDate date,
+    regId int NOT NULL AUTO_INCREMENT,
+    foreign key(examId) references EXAM(examId) ON DELETE CASCADE,
+    foreign key(stuId) references STUDENT(stuId) ON DELETE CASCADE,
+    primary key(regId),
+    unique(examId, stuId)
+);
+*/
+
+create table REG(
+    examId int NOT NULL,
+    stuId int,
+    regDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     regId int NOT NULL AUTO_INCREMENT,
     foreign key(examId) references EXAM(examId) ON DELETE CASCADE,
     foreign key(stuId) references STUDENT(stuId) ON DELETE CASCADE,
