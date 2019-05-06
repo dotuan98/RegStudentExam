@@ -30,9 +30,9 @@ public class Module {
 		statement.executeQuery();
 	}
 
-	// Remove module
-	public static void removeModule(int mod_id) throws SQLException, ClassNotFoundException {
-		PreparedStatement statement = initStatement("CALL RemoveModule(?)");
+	// delete module
+	public static void deleteModule(int mod_id) throws SQLException, ClassNotFoundException {
+		PreparedStatement statement = initStatement("CALL DeleteModule(?)");
 		statement.setInt(1, mod_id);
 		statement.executeQuery();
 	}
@@ -67,9 +67,9 @@ public class Module {
 		statement.executeQuery();
 	}
 
-	// Remove a lecturer of a module
-	public static void removeLecturerOfModule(int lec_id, int mod_id) throws SQLException, ClassNotFoundException {
-		PreparedStatement statement = initStatement("CALL RemoveLecturerOfModule(?, ?)");
+	// delete a lecturer of a module
+	public static void deleteLecturerOfModule(int lec_id, int mod_id) throws SQLException, ClassNotFoundException {
+		PreparedStatement statement = initStatement("CALL DeleteLecturerOfModule(?, ?)");
 		statement.setInt(1, lec_id);
 		statement.setInt(2, mod_id);
 		statement.executeQuery();

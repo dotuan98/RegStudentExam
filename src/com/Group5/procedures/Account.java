@@ -63,26 +63,26 @@ public class Account {
 		return convertOne(statement.executeQuery());
 	}
 	
-	// --------------- Remove ---------------
+	// --------------- Delete ---------------
 	
-	// Remove an account
-	public static void removeAccount(String login) throws SQLException, ClassNotFoundException {
-		PreparedStatement statement = initStatement("CALL RemoveAccount(?)");
+	// Delete an account
+	public static void deleteAccount(String login) throws SQLException, ClassNotFoundException {
+		PreparedStatement statement = initStatement("CALL DeleteAccount(?)");
 		statement.setString(1, login);
 		statement.executeQuery();
 	}
 	
-	// --------------- Get All ---------------
+	// --------------- List All ---------------
 	
-	// Get all students
+	// List all students
 	public static JSONArray getAllStudent () throws SQLException, ClassNotFoundException {
-    	PreparedStatement statement = initStatement("call GetAllStudent()");
+    	PreparedStatement statement = initStatement("call ListAllStudent()");
         return convertAll(statement.executeQuery());
     }
 	
-	// Get all lecturers
+	// List all lecturers
 		public static JSONArray getAllLecturer () throws SQLException, ClassNotFoundException {
-	    	PreparedStatement statement = initStatement("call GetAllLecturer()");
+	    	PreparedStatement statement = initStatement("call ListAllLecturer()");
 	        return convertAll(statement.executeQuery());
 	    }
 

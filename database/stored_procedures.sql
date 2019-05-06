@@ -1,5 +1,5 @@
 DELIMITER //
-DROP PROCEDURE IF EXISTS `AddExam` ;
+DROP PROCEDURE IF EXISTS `AddExam` //
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `AddExam`( IN exam_deadline DATE, IN exam_date DATE, IN exam_from TIME,
                              IN exam_to TIME, IN module_id INT)
@@ -8,7 +8,7 @@ BEGIN
     VALUES (exam_deadline, exam_date, exam_from, exam_to, module_id);
 END //
 
-DROP PROCEDURE IF EXISTS `AddLecturer` ;
+DROP PROCEDURE IF EXISTS `AddLecturer` //
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `AddLecturer`(IN name_login varchar(20), password_account varchar(20), name_account varchar(20), surname_account varchar(20))
 BEGIN
@@ -16,14 +16,14 @@ BEGIN
     insert into LECTURER(accId) values (last_insert_id());
 END //
 
-DROP PROCEDURE IF EXISTS `AddModule` ;
+DROP PROCEDURE IF EXISTS `AddModule` //
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `AddModule`(IN name_module varchar(30), code_module varchar(20), semester_id int)
 BEGIN
 	Insert into MODULE(name, code, semId) values(name_module, code_module, semester_id);
 END //
 
-DROP PROCEDURE IF EXISTS `AddSemester` ;
+DROP PROCEDURE IF EXISTS `AddSemester` //
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `AddSemester`(IN sem_start DATE, IN sem_end DATE)
 BEGIN
@@ -31,14 +31,14 @@ BEGIN
     VALUES (sem_start, sem_end);
 END //
 
-DROP PROCEDURE IF EXISTS `AddSession` ;
+DROP PROCEDURE IF EXISTS `AddSession` //
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `AddSession`(IN sessiondate date,  sessionfrom time, sessionto time, module_id int)
 BEGIN
 	insert into SESSION(sesDate, sesFrom, sesTo, modId) values (sessiondate,sessionfrom,sessionto,module_id); 
 END //
 
-DROP PROCEDURE IF EXISTS `AddStudent` ;
+DROP PROCEDURE IF EXISTS `AddStudent` //
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `AddStudent`(IN name_login varchar(20), password_account varchar(20), name_account varchar(20), surname_account varchar(20), code_student varchar(20))
 BEGIN
@@ -50,7 +50,7 @@ BEGIN
     
 END //
 
-DROP PROCEDURE IF EXISTS `AllExamsOverlappedInDay` ;
+DROP PROCEDURE IF EXISTS `AllExamsOverlappedInDay` //
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `AllExamsOverlappedInDay`(IN exam_date date)
 BEGIN
@@ -60,15 +60,15 @@ BEGIN
 	WHERE E.examDate = exam_date  AND (E.examFrom BETWEEN E1.examFrom AND E1.examTo) ;
 END //
 
-DROP PROCEDURE IF EXISTS `AssignLecturerToModule` ;
+DROP PROCEDURE IF EXISTS `AddLecturerToModule` //
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `AssignLecturerToModule`(IN lecturer_id int, IN module_id int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AddLecturerToModule`(IN lecturer_id int, IN module_id int)
 BEGIN
 	INSERT INTO teach (lecId, modId)
         VALUE (lecturer_id, module_id);
 END //
 
-DROP PROCEDURE IF EXISTS `CheckAccountExist` ;
+DROP PROCEDURE IF EXISTS `CheckAccountExist` //
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `CheckAccountExist`(IN username varchar(20), pass varchar(20))
 BEGIN
@@ -77,18 +77,18 @@ BEGIN
     WHERE a.login = username AND a.password = pass;
 END //
 
-DROP PROCEDURE IF EXISTS `GetAllLecturer` ;
+DROP PROCEDURE IF EXISTS `ListAllLecturer` //
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `GetAllLecturer`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ListAllLecturer`()
 BEGIN
 	SELECT A.name, A.surname
     FROM account A 
     JOIN Lecturer L ON (A.accId = L.accId);
 END //
 
-DROP PROCEDURE IF EXISTS `GetAllLecturersTeachModule` ;
+DROP PROCEDURE IF EXISTS `ListAllLecturersTeachModule` //
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `GetAllLecturersTeachModule`(IN module_id int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ListAllLecturersTeachModule`(IN module_id int)
 BEGIN
 	SELECT A.name, A.surname
 	FROM ACCOUNT A 
@@ -97,18 +97,17 @@ BEGIN
 	WHERE T.modId = module_id;
 END //
 
-DROP PROCEDURE IF EXISTS `GetAllModule` ;
+drop procedure if exists `ListAllModules` //
+create procedure ListAllModules()
+begin
+	select M.modId, M.name, M.code, S.semId, S.semFrom, S.semTo
+    from module M
+		join semester S on (M.semId = S.semId);
+end //
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `GetAllModule`()
-BEGIN
-	SELECT M.name, M.code, S.semFrom, S.semTo
-    FROM module M, semester S
-    WHERE M.semId = S.semId;
-END //
+DROP PROCEDURE IF EXISTS `ListAllModulesInSemester` //
 
-DROP PROCEDURE IF EXISTS `GetAllModulesInSemester` ;
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `GetAllModulesInSemester`(IN semester_id int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ListAllModulesInSemester`(IN semester_id int)
 BEGIN
 	SELECT M.name
 	FROM MODULE M
@@ -116,19 +115,20 @@ BEGIN
 	WHERE S.semId = semester_id;
 END //
 
-DROP PROCEDURE IF EXISTS `GetAllModulesStudentAttend` ;
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `GetAllModulesStudentAttend`(IN student_id int)
+DROP PROCEDURE IF EXISTS `ListModulesOfStudent` //
+CREATE PROCEDURE ListModulesOfStudent(student_id int)
 BEGIN
-	SELECT M.name
-	FROM MODULE M
-	JOIN ENROLL E ON (M.modId = E.modId)	
-	WHERE E.stuId = student_id;
-END //
+	select S.stuID, A.name as student_name, A.surname, M.name
+	from module M
+		join enroll E on (E.modID = M.modID)
+        join student S on (E.stuID = S.stuID)
+        join account A on (S.accID = A.accID)
+	where E.stuID = student_id;
+END//
 
-DROP PROCEDURE IF EXISTS `GetAllModulesTeacherTeach` ;
+DROP PROCEDURE IF EXISTS `ListAllModulesTeacherTeach` //
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `GetAllModulesTeacherTeach`(IN name_lecturer varchar(20))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ListAllModulesTeacherTeach`(IN name_lecturer varchar(20))
 BEGIN
 	SELECT M.name
 	FROM MODULE M
@@ -138,35 +138,35 @@ BEGIN
 	WHERE A.name = name_lecturer;
 END //
 
-DROP PROCEDURE IF EXISTS `GetAllSemester` ;
+DROP PROCEDURE IF EXISTS `ListAllSemester` //
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `GetAllSemester`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ListAllSemester`()
 BEGIN
 	SELECT S.semFrom, S.semTo
     FROM semester S;
 END //
 
-DROP PROCEDURE IF EXISTS `GetAllSessionsOfModule` ;
+DROP PROCEDURE IF EXISTS `ListAllSessionsOfModule` //
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `GetAllSessionsOfModule`(IN module_id INT)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ListAllSessionsOfModule`(IN module_id INT)
 BEGIN
     SELECT S.sesDate, S.sesFrom, S.sesTo
     FROM SESSION S
     WHERE S.modId = module_id;
 END //
 
-DROP PROCEDURE IF EXISTS `GetAllStudent` ;
+DROP PROCEDURE IF EXISTS `ListAllStudent` //
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `GetAllStudent`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ListAllStudent`()
 BEGIN
 	SELECT A.name, A.surname, S.code
     FROM account A 
     JOIN student S ON (A.accId = S.accId);
 END //
 
-DROP PROCEDURE IF EXISTS `GetModule` ;
+DROP PROCEDURE IF EXISTS `ListModule` //
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `GetModule`(IN module_id int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ListModule`(IN module_id int)
 BEGIN
 	SELECT M.modId,
            M.code,
@@ -184,10 +184,10 @@ BEGIN
 END //
 
 
-DROP PROCEDURE IF EXISTS `GetParticipantsOfExam` ;
+DROP PROCEDURE IF EXISTS `ListParticipantsOfExam` //
 
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `GetParticipantsOfExam`(IN exam_id INT)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ListParticipantsOfExam`(IN exam_id INT)
 BEGIN
     SELECT S.code, A.name, A.surname
     FROM exam E
@@ -198,16 +198,16 @@ BEGIN
 END //
 
 
-DROP PROCEDURE IF EXISTS `GetSemester` ;
+DROP PROCEDURE IF EXISTS `ListSemester` //
 
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `GetSemester`(IN semester_id int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ListSemester`(IN semester_id int)
 BEGIN
 	select semFrom, semTo from semester where semId = semester_id;
 END //
 
 
-DROP PROCEDURE IF EXISTS `ListAbsentStudentsOfSession` ;
+DROP PROCEDURE IF EXISTS `ListAbsentStudentsOfSession` //
 
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ListAbsentStudentsOfSession`(session_id int)
@@ -227,7 +227,7 @@ BEGIN
 END //
 
 
-DROP PROCEDURE IF EXISTS `ListAvailableExam` ;
+DROP PROCEDURE IF EXISTS `ListAvailableExam` //
 
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ListAvailableExam`(IN student_id int, currDate date)
@@ -243,7 +243,7 @@ BEGIN
 END //
 
 
-DROP PROCEDURE IF EXISTS `ListExamsOfSemester` ;
+DROP PROCEDURE IF EXISTS `ListExamsOfSemester` //
 
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ListExamsOfSemester`(semester_id int)
@@ -256,7 +256,7 @@ BEGIN
 END //
 
 
-DROP PROCEDURE IF EXISTS `ListModulesOfStudent` ;
+DROP PROCEDURE IF EXISTS `ListModulesOfStudent` //
 
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ListModulesOfStudent`(IN student_id int)
@@ -270,7 +270,7 @@ BEGIN
 END //
 
 
-DROP PROCEDURE IF EXISTS `ListParticipatedStudentsOfSession` ;
+DROP PROCEDURE IF EXISTS `ListParticipatedStudentsOfSession` //
 
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ListParticipatedStudentsOfSession`(session_id int)
@@ -284,7 +284,7 @@ BEGIN
 END //
 
 
-DROP PROCEDURE IF EXISTS `ModifyAccount` ;
+DROP PROCEDURE IF EXISTS `ModifyAccount` //
 
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ModifyAccount`(IN acc_login VARCHAR(20), IN acc_name VARCHAR(20), IN acc_surname VARCHAR(20), IN acc_id INT)
@@ -297,7 +297,7 @@ BEGIN
 END //
 
 
-DROP PROCEDURE IF EXISTS `ModifyModule` ;
+DROP PROCEDURE IF EXISTS `ModifyModule` //
 
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ModifyModule`(IN mod_name varchar(30), IN mod_code VARCHAR(20), IN module_id INT)
@@ -309,7 +309,7 @@ BEGIN
 END //
 
 
-DROP PROCEDURE IF EXISTS `ModifySemester` ;
+DROP PROCEDURE IF EXISTS `ModifySemester` //
 
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ModifySemester`(IN semester_id INT, IN sem_from DATE, IN sem_to DATE)
@@ -321,7 +321,7 @@ BEGIN
 END //
 
 
-DROP PROCEDURE IF EXISTS `ModifySession` ;
+DROP PROCEDURE IF EXISTS `ModifySession` //
 
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ModifySession`(IN session_date date, IN session_from time, IN session_to time, IN session_id int)
@@ -334,7 +334,7 @@ BEGIN
 END //
 
 
-DROP PROCEDURE IF EXISTS `ModifyStudent` ;
+DROP PROCEDURE IF EXISTS `ModifyStudent` //
 
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ModifyStudent`(IN acc_login VARCHAR(20), IN acc_name VARCHAR(20), IN acc_surname VARCHAR(20), IN acc_id INT, IN stu_code VARCHAR(20))
@@ -346,7 +346,7 @@ BEGIN
 END //
 
 
-DROP PROCEDURE IF EXISTS `RegisteredExamsOfStudent` ;
+DROP PROCEDURE IF EXISTS `RegisteredExamsOfStudent` //
 
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `RegisteredExamsOfStudent`(IN student_id INT)
@@ -359,7 +359,7 @@ BEGIN
 END //
 
 
-DROP PROCEDURE IF EXISTS `RegisterStudentForExam` ;
+DROP PROCEDURE IF EXISTS `RegisterStudentForExam` //
 
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `RegisterStudentForExam`(student_id int, exam_id int)
@@ -368,20 +368,20 @@ BEGIN
 END //
 
 
-DROP PROCEDURE IF EXISTS `RemoveAccount` ;
+DROP PROCEDURE IF EXISTS `DeleteAccount` //
 
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `RemoveAccount`(IN login_name varchar(20))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteAccount`(IN login_name varchar(20))
 BEGIN
 	DELETE FROM account
     WHERE login = login_name;
 END //
 
 
-DROP PROCEDURE IF EXISTS `RemoveExam` ;
+DROP PROCEDURE IF EXISTS `DeleteExam` //
 
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `RemoveExam`(IN exam_id int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteExam`(IN exam_id int)
 BEGIN
 	DELETE 
     FROM exam 
@@ -389,47 +389,46 @@ BEGIN
 END //
 
 
-DROP PROCEDURE IF EXISTS `RemoveLecturerOfModule` ;
+DROP PROCEDURE IF EXISTS `DeleteLecturerOfModule` //
 
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `RemoveLecturerOfModule`(IN lec_id int, IN mod_id int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteLecturerOfModule`(IN lec_id int, IN mod_id int)
 BEGIN
 	DELETE FROM teach
     WHERE lecId = lec_id and modID = mod_id;
 END //
 
 
-DROP PROCEDURE IF EXISTS `RemoveModule` ;
+drop procedure if exists `DeleteModule` //
+create procedure DeleteModule(moduleId int)
+begin
+	delete
+    from module
+    where module.modId = moduleId;
+end//
 
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `RemoveModule`(IN module_id int)
-BEGIN
-	DELETE FROM module
-	WHERE modId=module_id;
-END //
+DROP PROCEDURE IF EXISTS `DeleteSemester` //
 
 
-DROP PROCEDURE IF EXISTS `RemoveSemester` ;
-
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `RemoveSemester`(IN sem_id int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteSemester`(IN sem_id int)
 BEGIN
 	DELETE FROM semester
 	WHERE semId=sem_id;
 END //
 
 
-DROP PROCEDURE IF EXISTS `RemoveSession` ;
+DROP PROCEDURE IF EXISTS `DeleteSession` //
 
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `RemoveSession`(IN session_id int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteSession`(IN session_id int)
 BEGIN
 	DELETE FROM session
 	WHERE sesId=session_id;
 END //
 
 
-DROP PROCEDURE IF EXISTS `SignInSession` ;
+DROP PROCEDURE IF EXISTS `SignInSession` //
 
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SignInSession`(IN student_id int, IN session_id int)
@@ -438,7 +437,7 @@ BEGIN
 END //
 
 
-DROP PROCEDURE IF EXISTS `UnregisterExam` ;
+DROP PROCEDURE IF EXISTS `UnregisterExam` //
 
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `UnregisterExam`(IN student_id INT, IN exam_id INT)
