@@ -77,6 +77,19 @@ BEGIN
     WHERE a.login = username AND a.password = pass;
 END //
 
+DROP PROCEDURE IF EXISTS `CheckStudentAttendancesOfModule` //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CheckStudentAttendancesOfModule`(IN student_id int, module_id int)
+BEGIN
+	select a.sesDate, a.sesFrom, a.sesTo, b.stuId
+    from   (select s.sesId, sesDate, sesFrom, sesTo
+			from session S
+			where s.modId = module_id) a
+			left join (  select se.sesID, se.sesDate, se.sesFrom, se.sesTo, s.stuId 
+						 from student s join sign si on (s.stuId = si.stuId)
+						 join session se on (si.sesId = se.sesId)
+						 where s.stuId = student_id and modId = module_id ) b on (a.sesId = b.sesId);
+END//
+
 DROP PROCEDURE IF EXISTS `ListAllLecturer` //
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ListAllLecturer`()
@@ -118,7 +131,7 @@ END //
 DROP PROCEDURE IF EXISTS `ListModulesOfStudent` //
 CREATE PROCEDURE ListModulesOfStudent(student_id int)
 BEGIN
-	select S.stuID, A.name as student_name, A.surname, M.name
+	select M.name
 	from module M
 		join enroll E on (E.modID = M.modID)
         join student S on (E.stuID = S.stuID)
@@ -300,13 +313,15 @@ END //
 DROP PROCEDURE IF EXISTS `ModifyModule` //
 
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ModifyModule`(IN mod_name varchar(30), IN mod_code VARCHAR(20), IN module_id INT)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ModifyModule`(IN mod_name varchar(30), IN mod_code VARCHAR(20), IN sem_id INT, IN module_id INT)
 BEGIN
 	UPDATE MODULE M
     SET M.name = mod_name,
-        M.code = mod_code 
+        M.code = mod_code ,
+        M.semId = sem_id
     WHERE M.modId = module_id;
 END //
+CALL ModifyModule("HUVILO", "HU", 1, 15)//
 
 
 DROP PROCEDURE IF EXISTS `ModifySemester` //

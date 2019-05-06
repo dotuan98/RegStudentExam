@@ -128,6 +128,14 @@ insert into ENROLL(stuId, modId) values(10, 13);
 insert into ENROLL(stuId, modId) values(10, 14);
 insert into ENROLL(stuId, modId) values(10, 15);
 
+#test for student 1
+insert into ENROLL(stuId, modId) values(1, 4);
+insert into ENROLL(stuId, modId) values(1, 5);
+insert into ENROLL(stuId, modId) values(1, 6);
+insert into ENROLL(stuId, modId) values(1, 7);
+insert into ENROLL(stuId, modId) values(1, 8);
+insert into ENROLL(stuId, modId) values(1, 9);
+insert into ENROLL(stuId, modId) values(1, 10);
 
 
 #insert teach
@@ -204,13 +212,25 @@ insert into EXAM(deadline, examDate, examFrom, examTo, modId) values ('2018-05-1
 insert into EXAM(deadline, examDate, examFrom, examTo, modId) values ('2018-05-18', '2018-05-21', '09:00:00', '10:30:00', 13);
 insert into EXAM(deadline, examDate, examFrom, examTo, modId) values ('2018-05-18', '2018-05-21', '09:00:00', '10:30:00', 14);
 
-insert into EXAM(deadline, examDate, examFrom, examTo, modId) values ('2019-06-05', '2018-06-10', '09:00:00', '10:30:00', 1);
-insert into EXAM(deadline, examDate, examFrom, examTo, modId) values ('2019-06-10', '2019-06-15', '09:00:00', '10:30:00', 2);
+#inser test for studentId = 1
+
+#can not register
+insert into EXAM(deadline, examDate, examFrom, examTo, modId) values ('2019-05-05', '2018-05-10', '09:00:00', '10:30:00', 1);
+insert into EXAM(deadline, examDate, examFrom, examTo, modId) values ('2019-05-10', '2019-05-15', '09:00:00', '10:30:00', 2);
+#successfully register
+insert into EXAM(deadline, examDate, examFrom, examTo, modId) values ('2019-06-05', '2018-06-10', '09:00:00', '10:30:00', 3);
+insert into EXAM(deadline, examDate, examFrom, examTo, modId) values ('2019-06-10', '2019-06-15', '09:00:00', '10:30:00', 4);
+#can register
+insert into EXAM(deadline, examDate, examFrom, examTo, modId) values ('2019-05-15', '2018-05-20', '10:30:00', '12:00:00', 5);
+insert into EXAM(deadline, examDate, examFrom, examTo, modId) values ('2019-05-15', '2018-05-20', '13:00:00', '14:30:00', 6);
+insert into EXAM(deadline, examDate, examFrom, examTo, modId) values ('2019-06-05', '2018-06-10', '09:00:00', '11:00:00', 7);
+insert into EXAM(deadline, examDate, examFrom, examTo, modId) values ('2019-06-15', '2018-06-20', '13:00:00', '14:30:00', 8);
 
 /*
+
 #insert sign
 #insert into SIGN(sesId, stuId, signTime) values (1, 1, '09:00:00');
-insert into SIGN(sesId, stuId, signTime) values (1, 3, '09:00:00');
+#insert into SIGN(sesId, stuId, signTime) values (1, 3, '09:00:00');
 insert into SIGN(sesId, stuId, signTime) values (1, 2, '13:00:00');
 insert into SIGN(sesId, stuId, signTime) values (1, 4, '09:00:00');
 insert into SIGN(sesId, stuId, signTime) values (1, 5, '09:00:00');
@@ -229,7 +249,10 @@ insert into SIGN(sesId, stuId, signTime) values (8, 8, '09:00:00');
 
 #insert sign
 
+
 #student 3 attends 80% of module 1
+
+
 insert into SIGN(sesId, stuId) values (1, 3);
 insert into SIGN(sesId, stuId) values (2, 3);
 insert into SIGN(sesId, stuId) values (3, 3);
@@ -321,6 +344,7 @@ insert into REG(examId, stuId, regDate) values(9, 9, '2018-05-25');
 insert into REG(examId, stuId, regDate) values(10, 10, '2018-05-26');
 */
 
+
 #insert REG
 
 insert into REG(examId, stuId) values(1, 3);
@@ -334,5 +358,7 @@ insert into REG(examId, stuId) values(7, 7);
 insert into REG(examId, stuId) values(8, 8);
 insert into REG(examId, stuId) values(9, 9);
 insert into REG(examId, stuId) values(10, 10);
+insert into REG(examId, stuId) values(18, 1);
+insert into REG(examId, stuId) values(19, 1);
 end//
 call InitializeInstances()//

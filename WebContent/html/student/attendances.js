@@ -3,13 +3,14 @@ $(function(){
     
     $.ajax({
         type: 'GET',
-        url:'/RegStudentExam/view/accounts',
+        url:'/RegStudentExam/view/list_modules_of_student',
         success: function(modules) {
             $.each(modules, function(i, module) {
                 $enrolledModules.append('<li>' + module.name + '</li>');
             });
         }
     });
+    
 });
 
 /*OLD VERSION

@@ -11,12 +11,13 @@ public class Module {
 
 	// ------------------ Basic Operation ------------------
 	// Modify module
-	public static void modifyModule(String mod_name, String mod_code, int sem_id)
+	public static void modifyModule(String mod_name, String mod_code, int sem_id, int mod_id)
 			throws SQLException, ClassNotFoundException {
-		PreparedStatement statement = initStatement("CALL ModifyModule(?, ?, ?)");
+		PreparedStatement statement = initStatement("CALL ModifyModule(?, ?, ?, ?)");
 		statement.setString(1, mod_name);
 		statement.setString(2, mod_code);
 		statement.setInt(3, sem_id);
+		statement.setInt(4, mod_id);
 		statement.executeQuery();
 	}
 
@@ -29,7 +30,7 @@ public class Module {
 
 	// ------------------ Student - Modules ------------------
 	//Get all modules that a student attends
-    public static JSONArray getAllModulesStudentAttend (int student_id) throws SQLException, ClassNotFoundException{
+    public static JSONArray listModulesOfStudent (int student_id) throws SQLException, ClassNotFoundException{
         PreparedStatement statement = initStatement("call ListModulesOfStudent(?)");
         statement.setInt(1, student_id);
         return ResultsetConverter.convertAll(statement.executeQuery());

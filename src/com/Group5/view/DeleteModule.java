@@ -23,6 +23,6 @@ public class DeleteModule{
     @POST
     public Response doPost(@PathParam("id") int moduleID) throws SQLException, ClassNotFoundException {
         Module.deleteModule(moduleID);
-        return Response.seeOther(URI.create("/RegStudentExam/html/assisstant/modules.html")).build();
+        return Response.seeOther(URI.create("/RegStudentExam/html/assistant/modules.html")).build();
     }
 }

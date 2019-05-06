@@ -1,4 +1,4 @@
-use vgu;
+use vgu1;
 
 drop table ASSISSTANT;
 drop table ENROLL;
