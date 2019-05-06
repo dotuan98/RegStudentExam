@@ -462,6 +462,16 @@ BEGIN
       AND examId = exam_id;
 END //
 
-
-
+DROP PROCEDURE IF EXISTS `ListCancellableExams` //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ListCancellableExams`(IN student_id int)
+BEGIN
+	select m.name, ex.examID, ex.deadline, ex.examDate, ex.examFrom, ex.examTo
+    from student s join enroll e on ( s.stuId=e.stuId) 
+    join module m on ( e.modId = m.modId) 
+    join exam ex on ( ex.modId = m.modId)
+    where student_id = s.stuId and NOW() < ex.deadline and ex.examId in (
+		select examId
+		from reg
+    );
+END
 
