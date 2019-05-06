@@ -300,13 +300,15 @@ END //
 DROP PROCEDURE IF EXISTS `ModifyModule` //
 
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ModifyModule`(IN mod_name varchar(30), IN mod_code VARCHAR(20), IN module_id INT)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ModifyModule`(IN mod_name varchar(30), IN mod_code VARCHAR(20), IN sem_id INT, IN module_id INT)
 BEGIN
 	UPDATE MODULE M
     SET M.name = mod_name,
-        M.code = mod_code 
+        M.code = mod_code ,
+        M.semId = sem_id
     WHERE M.modId = module_id;
 END //
+CALL ModifyModule("HUVILO", "HU", 1, 15)//
 
 
 DROP PROCEDURE IF EXISTS `ModifySemester` //

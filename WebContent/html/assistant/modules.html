@@ -18,10 +18,11 @@
   <h3>Modules List</h3>
   <table id="modules-table">
   	<tr>
-  		<th>Module ID</th>
+  		<th>ModuleID</th>
   		<th>Name</th>
   		<th>Code</th>
-  		<th>Semester ID</th>
+  		<th>SemesterID</th>
+  		<th></th>
   		<th></th>
   	</tr>
   	
@@ -36,9 +37,11 @@
     Semester ID:
     <input type="number" name="semester-id" placeholder="1..8"><br/>
     <input type="submit" value="SUBMIT"/>
+    </form>
     
+    <h3 id="modify-header"><a id='modify-anchor'>Modify Module ...</a></h3>
+    <form id="modify-form" action="/" method="POST"></form>
  
-</form>
 
 
   
@@ -47,29 +50,5 @@
 
 <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js" ></script>
 <script src="modules.js"></script>
-<!-- CODE HUNG
-<script>
-    function success(semesters) {
-        var select = $("#selectSem");
-        var option = "";
-        for (var i = 0; i < semesters.length; i++) {
-            option +=
-                "<option value='" + semesters[i].id + "'>" +
-                "Semester " + semesters[i].id + ": [" + semesters[i].start + " - " + semesters[i].end + "]" +
-                "</option>"
-        }
-        select.html(option);
-    }
-    function getSemester() {
-        $.ajax({
-            url: "/view/semester",
-            type: "POST",
-            success: success,
-            error: displayError
-        })
-    }
-    $(document).ready(getSemester);
-</script>
--->
 </body>
 </html> 
