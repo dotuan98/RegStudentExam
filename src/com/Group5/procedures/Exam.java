@@ -56,7 +56,7 @@ public class Exam {
 	}
 
 	// Unregister a student for an exam
-	public static void deregisterExam(int student_id, int exam_id) throws SQLException, ClassNotFoundException {
+	public static void cancelExam(int student_id, int exam_id) throws SQLException, ClassNotFoundException {
 		PreparedStatement statement = initStatement("CALL UnregisterExam(?,?)");
 		statement.setInt(1, student_id);
 		statement.setInt(2, exam_id);
@@ -84,7 +84,12 @@ public class Exam {
 		statement.setDate(2, currDate);
 		return convertAll(statement.executeQuery());
 	}
-	
+	public static JSONArray listCancellableExams(int student_id) throws SQLException, ClassNotFoundException {
+		PreparedStatement statement = initStatement("CALL ListCancellableExams(?)");
+		statement.setInt(1, student_id);
+		//statement.setDate(2, currDate);
+		return convertAll(statement.executeQuery());
+	}
 
 	// ------------------ Semester - Exam ------------------
 	

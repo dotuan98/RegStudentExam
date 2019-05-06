@@ -16,7 +16,7 @@ import com.Group5.procedures.Exam;
 import com.Group5.procedures.Module;
 
 @Path("/view/list_available_exams")
-public class listAvailableExams {
+public class ListAvailableExams {
 
 	@GET
     @Produces(MediaType.APPLICATION_JSON)
