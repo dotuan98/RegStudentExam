@@ -15,13 +15,8 @@ $(document).ready(function(){
 	//var $modules = $('#modules'); 
 		$.ajax({
 			type: "POST",
-			url: "rest/view/accounts/students",
+			url: "view/accounts/students",
 			dataType: "json",
-			/*success: function (data){
-				$.each(data, function(i, data){
-					$modules.append('<li>name: ' + data.name + '</li>');
-				});
-			}*/
 			success:function(jsondata){
 				print(jsondata);
 			}

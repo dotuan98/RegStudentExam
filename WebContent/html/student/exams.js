@@ -1,3 +1,4 @@
+/*
 $(function(){
     var $available_exams r = $('#available-exams');
     
@@ -11,3 +12,4 @@ $(function(){
         }
     });
 });
+*/

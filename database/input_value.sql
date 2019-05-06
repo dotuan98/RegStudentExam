@@ -188,6 +188,7 @@ insert into EXAM(deadline, examDate, examFrom, examTo, modId) values ('2018-05-1
 insert into EXAM(deadline, examDate, examFrom, examTo, modId) values ('2018-05-18', '2018-05-21', '09:00:00', '10:30:00', 13);
 insert into EXAM(deadline, examDate, examFrom, examTo, modId) values ('2018-05-18', '2018-05-21', '09:00:00', '10:30:00', 14);
 
+/*
 #insert sign
 #insert into SIGN(sesId, stuId, signTime) values (1, 1, '09:00:00');
 insert into SIGN(sesId, stuId, signTime) values (1, 3, '09:00:00');
@@ -205,7 +206,27 @@ insert into SIGN(sesId, stuId, signTime) values (7, 5, '09:00:00');
 insert into SIGN(sesId, stuId, signTime) values (7, 6, '09:00:00');
 insert into SIGN(sesId, stuId, signTime) values (7, 7, '09:00:00');
 insert into SIGN(sesId, stuId, signTime) values (8, 8, '09:00:00');
+*/
 
+#insert sign
+
+insert into SIGN(sesId, stuId) values (1, 3);
+insert into SIGN(sesId, stuId) values (2, 3);
+insert into SIGN(sesId, stuId) values (1, 4);
+insert into SIGN(sesId, stuId) values (1, 5);
+insert into SIGN(sesId, stuId) values (1, 6);
+insert into SIGN(sesId, stuId) values (3, 3);
+insert into SIGN(sesId, stuId) values (4, 6);
+insert into SIGN(sesId, stuId) values (5, 7);
+insert into SIGN(sesId, stuId) values (6, 7);
+insert into SIGN(sesId, stuId) values (7, 3);
+insert into SIGN(sesId, stuId) values (7, 4);
+insert into SIGN(sesId, stuId) values (7, 5);
+insert into SIGN(sesId, stuId) values (7, 6);
+insert into SIGN(sesId, stuId) values (7, 7);
+insert into SIGN(sesId, stuId) values (8, 8);
+
+/*
 #insert REG
 
 insert into REG(examId, stuId, regDate) values(1, 3, '2018-05-20');
@@ -219,5 +240,21 @@ insert into REG(examId, stuId, regDate) values(7, 7, '2018-05-23');
 insert into REG(examId, stuId, regDate) values(8, 8, '2018-05-24');
 insert into REG(examId, stuId, regDate) values(9, 9, '2018-05-25');
 insert into REG(examId, stuId, regDate) values(10, 10, '2018-05-26');
+
+*/
+
+#insert REG
+
+insert into REG(examId, stuId) values(1, 3);
+insert into REG(examId, stuId) values(1, 4);
+insert into REG(examId, stuId) values(1, 5);
+insert into REG(examId, stuId) values(2, 3);
+insert into REG(examId, stuId) values(5, 4);
+insert into REG(examId, stuId) values(5, 5);
+insert into REG(examId, stuId) values(6, 6);
+insert into REG(examId, stuId) values(7, 7);
+insert into REG(examId, stuId) values(8, 8);
+insert into REG(examId, stuId) values(9, 9);
+insert into REG(examId, stuId) values(10, 10);
 end//
 call InitializeInstances()//

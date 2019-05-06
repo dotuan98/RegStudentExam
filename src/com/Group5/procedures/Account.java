@@ -10,6 +10,10 @@ import org.json.JSONObject;
 
 public class Account {
 
+	//------------------ Basic Operation ------------------
+	
+	// --------------- ADD ---------------
+	
 	// Create a new student
 	public static JSONObject addNewStudent(String login, String password, String name, String surname, String code)
 			throws SQLException, ClassNotFoundException {
@@ -34,13 +38,8 @@ public class Account {
 		return convertOne(statement.executeQuery());
 	}
 
-	// Remove an account
-	public static void removeAccount(String login) throws SQLException, ClassNotFoundException {
-		PreparedStatement statement = initStatement("CALL RemoveAccount(?)");
-		statement.setString(1, login);
-		statement.executeQuery();
-	}
-
+	// --------------- MODIFY ---------------
+	
 	// Modify information of an account
 	public static JSONObject modifyAccount(String login, String name, String surname, int id)
 			throws SQLException, ClassNotFoundException {
@@ -64,10 +63,27 @@ public class Account {
 		return convertOne(statement.executeQuery());
 	}
 	
+	// --------------- Remove ---------------
+	
+	// Remove an account
+	public static void removeAccount(String login) throws SQLException, ClassNotFoundException {
+		PreparedStatement statement = initStatement("CALL RemoveAccount(?)");
+		statement.setString(1, login);
+		statement.executeQuery();
+	}
+	
+	// --------------- Get All ---------------
+	
 	// Get all students
 	public static JSONArray getAllStudent () throws SQLException, ClassNotFoundException {
     	PreparedStatement statement = initStatement("call GetAllStudent()");
         return convertAll(statement.executeQuery());
     }
+	
+	// Get all lecturers
+		public static JSONArray getAllLecturer () throws SQLException, ClassNotFoundException {
+	    	PreparedStatement statement = initStatement("call GetAllLecturer()");
+	        return convertAll(statement.executeQuery());
+	    }
 
 }
