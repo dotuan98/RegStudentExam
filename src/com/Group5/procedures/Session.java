@@ -68,9 +68,9 @@ public class Session {
     
     // ------------------ Module - Session ------------------
     
-    //Get all sessions of a module
-    public static JSONArray getAllSessionsOfModule(int mod_id) throws SQLException, ClassNotFoundException {
-        PreparedStatement statement = initStatement("CALL GetAllSessionsOfModule(?)");
+    //List all sessions of a module
+    public static JSONArray listAllSessionsOfModule(int mod_id) throws SQLException, ClassNotFoundException {
+        PreparedStatement statement = initStatement("CALL ListAllSessionsOfModule(?)");
         statement.setInt(1, mod_id);
         return convertAll(statement.executeQuery());
     }

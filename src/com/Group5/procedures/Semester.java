@@ -42,7 +42,7 @@ public class Semester {
         return convertAll(statement.executeQuery());
     }
 	
-	//Get a semester
+	//Get information of a semester
 	public static JSONObject getSemester(int semesterId) throws SQLException, ClassNotFoundException {
         PreparedStatement statement = initStatement("CALL GetSemester(?)");
         statement.setInt(1, semesterId);
