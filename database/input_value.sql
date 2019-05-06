@@ -150,17 +150,33 @@ insert into TEACH(accId, modId) values (14, 15);
 
 
 #insert session
-
+#module 1 has 10 sessions
 insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-01-01', '09:00:00', '12:00:00', 1); #1
 insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-01-01', '13:00:00', '16:00:00', 1); #2
 insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-01-02', '09:00:00', '12:00:00', 1);
 insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-01-02', '13:00:00', '16:00:00', 1);
 insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-01-03', '09:00:00', '12:00:00', 1);
 insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-01-03', '13:00:00', '16:00:00', 1);
-insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-01-01', '09:00:00', '12:00:00', 2);
-insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-01-01', '13:00:00', '16:00:00', 2);
-insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-01-02', '09:00:00', '12:00:00', 2);
-insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-01-02', '13:00:00', '16:00:00', 2);
+insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-01-04', '09:00:00', '12:00:00', 1);
+insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-01-04', '13:00:00', '16:00:00', 1);
+insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-01-05', '09:00:00', '12:00:00', 1);
+insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-01-05', '13:00:00', '16:00:00', 1);
+
+#module 2 has 12 sessions
+insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-02-01', '09:00:00', '12:00:00', 2);
+insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-02-01', '13:00:00', '16:00:00', 2);
+insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-02-02', '09:00:00', '12:00:00', 2);
+insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-02-02', '13:00:00', '16:00:00', 2);
+insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-02-03', '13:00:00', '16:00:00', 2);
+insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-02-04', '13:00:00', '16:00:00', 2);
+insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-02-05', '13:00:00', '16:00:00', 2);
+insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-02-06', '13:00:00', '16:00:00', 2);
+insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-02-07', '13:00:00', '16:00:00', 2);
+insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-02-08', '13:00:00', '16:00:00', 2);
+insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-02-09', '13:00:00', '16:00:00', 2);
+insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-02-10', '13:00:00', '16:00:00', 2);
+
+
 insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-02-01', '13:00:00', '16:00:00', 3);
 insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-02-02', '13:00:00', '16:00:00', 3);
 insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-03-02', '13:00:00', '16:00:00', 4);
@@ -210,19 +226,80 @@ insert into SIGN(sesId, stuId, signTime) values (8, 8, '09:00:00');
 
 #insert sign
 
+#student 3 attends 80% of module 1
 insert into SIGN(sesId, stuId) values (1, 3);
 insert into SIGN(sesId, stuId) values (2, 3);
-insert into SIGN(sesId, stuId) values (1, 4);
-insert into SIGN(sesId, stuId) values (1, 5);
-insert into SIGN(sesId, stuId) values (1, 6);
 insert into SIGN(sesId, stuId) values (3, 3);
+insert into SIGN(sesId, stuId) values (4, 3);
+insert into SIGN(sesId, stuId) values (5, 3);
+insert into SIGN(sesId, stuId) values (6, 3);
+insert into SIGN(sesId, stuId) values (7, 3);
+insert into SIGN(sesId, stuId) values (8, 3);
+
+#student 3 attends 100% of module 2
+insert into SIGN(sesId, stuId) values (11, 3);
+insert into SIGN(sesId, stuId) values (12, 3);
+insert into SIGN(sesId, stuId) values (13, 3);
+insert into SIGN(sesId, stuId) values (14, 3);
+insert into SIGN(sesId, stuId) values (15, 3);
+insert into SIGN(sesId, stuId) values (16, 3);
+insert into SIGN(sesId, stuId) values (17, 3);
+insert into SIGN(sesId, stuId) values (18, 3);
+insert into SIGN(sesId, stuId) values (19, 3);
+insert into SIGN(sesId, stuId) values (20, 3);
+insert into SIGN(sesId, stuId) values (21, 3);
+insert into SIGN(sesId, stuId) values (22, 3);
+insert into SIGN(sesId, stuId) values (23, 3);
+
+#student 4 attends 70% of module 1
+insert into SIGN(sesId, stuId) values (1, 4);
+insert into SIGN(sesId, stuId) values (2, 4);
+insert into SIGN(sesId, stuId) values (3, 4);
+insert into SIGN(sesId, stuId) values (4, 4);
+insert into SIGN(sesId, stuId) values (5, 4);
+insert into SIGN(sesId, stuId) values (6, 4);
+insert into SIGN(sesId, stuId) values (7, 4);
+
+#student 4 attends 80% of module 2
+insert into SIGN(sesId, stuId) values (11, 4);
+insert into SIGN(sesId, stuId) values (12, 4);
+insert into SIGN(sesId, stuId) values (13, 4);
+insert into SIGN(sesId, stuId) values (14, 4);
+insert into SIGN(sesId, stuId) values (15, 4);
+insert into SIGN(sesId, stuId) values (16, 4);
+insert into SIGN(sesId, stuId) values (17, 4);
+insert into SIGN(sesId, stuId) values (18, 4);
+insert into SIGN(sesId, stuId) values (19, 4);
+insert into SIGN(sesId, stuId) values (20, 4);
+insert into SIGN(sesId, stuId) values (21, 4);
+
+#student 5 attends 90% of module 1
+insert into SIGN(sesId, stuId) values (1, 5);
+insert into SIGN(sesId, stuId) values (2, 5);
+insert into SIGN(sesId, stuId) values (3, 5);
+insert into SIGN(sesId, stuId) values (4, 5);
+insert into SIGN(sesId, stuId) values (5, 5);
+insert into SIGN(sesId, stuId) values (6, 5);
+insert into SIGN(sesId, stuId) values (7, 5);
+insert into SIGN(sesId, stuId) values (8, 5);
+insert into SIGN(sesId, stuId) values (9, 5);
+
+#student 6 attends 100% of module 1
+insert into SIGN(sesId, stuId) values (1, 6);
+insert into SIGN(sesId, stuId) values (2, 6);
+insert into SIGN(sesId, stuId) values (3, 6);
 insert into SIGN(sesId, stuId) values (4, 6);
+insert into SIGN(sesId, stuId) values (5, 6);
+insert into SIGN(sesId, stuId) values (6, 6);
+insert into SIGN(sesId, stuId) values (7, 6);
+insert into SIGN(sesId, stuId) values (8, 6);
+insert into SIGN(sesId, stuId) values (9, 6);
+insert into SIGN(sesId, stuId) values (10, 6);
+
+
+
 insert into SIGN(sesId, stuId) values (5, 7);
 insert into SIGN(sesId, stuId) values (6, 7);
-insert into SIGN(sesId, stuId) values (7, 3);
-insert into SIGN(sesId, stuId) values (7, 4);
-insert into SIGN(sesId, stuId) values (7, 5);
-insert into SIGN(sesId, stuId) values (7, 6);
 insert into SIGN(sesId, stuId) values (7, 7);
 insert into SIGN(sesId, stuId) values (8, 8);
 
