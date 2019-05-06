@@ -131,7 +131,7 @@ END //
 DROP PROCEDURE IF EXISTS `ListModulesOfStudent` //
 CREATE PROCEDURE ListModulesOfStudent(student_id int)
 BEGIN
-	select M.name
+	select M.name, M.modID
 	from module M
 		join enroll E on (E.modID = M.modID)
         join student S on (E.stuID = S.stuID)
@@ -240,20 +240,21 @@ BEGIN
 END //
 
 
-DROP PROCEDURE IF EXISTS `ListAvailableExam` //
+DROP PROCEDURE IF EXISTS `ListAvailableExams` //
 
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ListAvailableExam`(IN student_id int, currDate date)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ListAvailableExams`(IN student_id int, IN currDate date)
 BEGIN
-	select m.name, ex.examID, ex.deadline, ex.examDate, ex.examFrom, ex.examTo
-    from student s join enroll e on ( s.stuId=e.stuId) 
-    join module m on ( e.modId = m.modId) 
-    join exam ex on ( ex.modId = m.modId)
-    where student_id = s.stuId and currDate < ex.deadline and student_id not in (
-		select stuId
-		from reg
-    );
-END //
+	select m.name, ex.examId, ex.deadline, ex.examDate, ex.examFrom, ex.examTo
+    from student s 
+    join enroll e on (s.stuId = e.stuId) 
+    join module m on (e.modId = m.modId) 
+    join exam ex on (m.modId = ex.modId)
+    where s.stuId = student_id and currDate < ex.deadline and ex.examId not in(
+		select examId
+        from reg
+        );
+END//
 
 
 DROP PROCEDURE IF EXISTS `ListExamsOfSemester` //
@@ -268,10 +269,8 @@ BEGIN
 	where S.semId = semester_id;
 END //
 
-
+/* OLD WRONG PROCEDURE
 DROP PROCEDURE IF EXISTS `ListModulesOfStudent` //
-
-
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ListModulesOfStudent`(IN student_id int)
 BEGIN
 	select S.stuID, A.name, A.surname, M.name
@@ -281,7 +280,7 @@ BEGIN
         join account A on (S.accID = A.accID)
 	where E.stuID = student_id;
 END //
-
+*/
 
 DROP PROCEDURE IF EXISTS `ListParticipatedStudentsOfSession` //
 

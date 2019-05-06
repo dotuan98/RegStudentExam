@@ -6,15 +6,15 @@ $(function(){
         url: '/RegStudentExam/view/list_available_exams',
         success: function(exams) {
             $.each(exams, function(i, exam) {
-                $registrable.append('<tr>'
+                $registrable_exams.append('<tr>'
                 		+ '<td>' + exam.examId + '</td>'
                 		+ '<td>' + exam.name + '</td>'
                 		+ '<td>' + exam.examDate + '</td>'
                 		+ '<td>' + exam.deadline + '</td>'
-//                		+ '<td>'
-//            			+ '<form method="post" action="/RegStudentExam/view/delete_module/'
-//            			+ module.modId + '"><button type="submit">Delete</button></form>'
-//            			+ '</td>'
+                		+ '<td>'
+            			+ '<form method="post" action="/RegStudentExam/view/register_exam/1/'	//currently assume stuID = 1
+            			+ exam.examId + '"><button type="submit">Register</button></form>'
+            			+ '</td>'
                 		+ '</tr>'
                 		);
             });

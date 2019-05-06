@@ -73,5 +73,12 @@ public class Module {
 		statement.setInt(2, mod_id);
 		statement.executeQuery();
 	}
+	
+	public static JSONArray checkStudentAttendancesofModule(int student_id, int module_id) throws SQLException, ClassNotFoundException {
+		PreparedStatement statement = initStatement("CALL CheckStudentAttendancesOfModule(?, ?)");
+		statement.setInt(1, student_id);
+		statement.setInt(2, module_id);
+        return ResultsetConverter.convertAll(statement.executeQuery());
+	}
 
 }

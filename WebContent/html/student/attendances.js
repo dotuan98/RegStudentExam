@@ -6,12 +6,24 @@ $(function(){
         url:'/RegStudentExam/view/list_modules_of_student',
         success: function(modules) {
             $.each(modules, function(i, module) {
-                $enrolledModules.append('<li>' + module.name + '</li>');
+                $enrolledModules.append('<li>' + module.name + module.modId + '</li>');
+                
+                $.ajax({
+                	type: 'GET',
+                	url: '/RegStudentExam/view/check_student_attendances_of_module/' + module.modId,
+                	success: function(sessions) {
+                		$enrolledModules.append('<li><table>'
+                				+ '<tr><th>' + module.modId + '</th></tr>'
+                				+'</table></li>');
+                	}
+                });
             });
         }
     });
     
 });
+
+$()
 
 /*OLD VERSION
 var enrolledModules = document.getElementById("enrolled-modules");

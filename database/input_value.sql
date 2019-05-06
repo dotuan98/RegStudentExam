@@ -259,15 +259,15 @@ insert into SIGN(sesId, stuId) values (3, 3);
 insert into SIGN(sesId, stuId) values (4, 3);
 insert into SIGN(sesId, stuId) values (5, 3);
 insert into SIGN(sesId, stuId) values (6, 3);
-insert into SIGN(sesId, stuId) values (7, 3);
 insert into SIGN(sesId, stuId) values (8, 3);
+insert into SIGN(sesId, stuId) values (9, 3);
 
 #student 3 attends 100% of module 2
 insert into SIGN(sesId, stuId) values (11, 3);
 insert into SIGN(sesId, stuId) values (12, 3);
 insert into SIGN(sesId, stuId) values (13, 3);
 insert into SIGN(sesId, stuId) values (14, 3);
-insert into SIGN(sesId, stuId) values (15, 3);
+#insert into SIGN(sesId, stuId) values (15, 3);
 insert into SIGN(sesId, stuId) values (16, 3);
 insert into SIGN(sesId, stuId) values (17, 3);
 insert into SIGN(sesId, stuId) values (18, 3);
@@ -282,7 +282,7 @@ insert into SIGN(sesId, stuId) values (1, 4);
 insert into SIGN(sesId, stuId) values (2, 4);
 insert into SIGN(sesId, stuId) values (3, 4);
 insert into SIGN(sesId, stuId) values (4, 4);
-insert into SIGN(sesId, stuId) values (5, 4);
+#insert into SIGN(sesId, stuId) values (5, 4);
 insert into SIGN(sesId, stuId) values (6, 4);
 insert into SIGN(sesId, stuId) values (7, 4);
 
@@ -292,7 +292,7 @@ insert into SIGN(sesId, stuId) values (12, 4);
 insert into SIGN(sesId, stuId) values (13, 4);
 insert into SIGN(sesId, stuId) values (14, 4);
 insert into SIGN(sesId, stuId) values (15, 4);
-insert into SIGN(sesId, stuId) values (16, 4);
+#insert into SIGN(sesId, stuId) values (16, 4);
 insert into SIGN(sesId, stuId) values (17, 4);
 insert into SIGN(sesId, stuId) values (18, 4);
 insert into SIGN(sesId, stuId) values (19, 4);

@@ -79,7 +79,7 @@ public class Exam {
 	
 	// List available exams for student to register
 	public static JSONArray listAvailableExams(int student_id, java.sql.Date currDate) throws SQLException, ClassNotFoundException {
-		PreparedStatement statement = initStatement("CALL ListAvailableExam(?, ?)");
+		PreparedStatement statement = initStatement("CALL ListAvailableExams(?, ?)");
 		statement.setInt(1, student_id);
 		statement.setDate(2, currDate);
 		return convertAll(statement.executeQuery());
