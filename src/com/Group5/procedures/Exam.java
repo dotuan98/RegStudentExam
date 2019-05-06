@@ -11,6 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class Exam {
+	//public static Date currDate = new Date();
 
 	// ------------------ Basic Operation ------------------
 
@@ -77,10 +78,10 @@ public class Exam {
 	}
 	
 	// List available exams for student to register
-	public static JSONArray listAvailableExam(int student_id, Date current_date) throws SQLException, ClassNotFoundException {
+	public static JSONArray listAvailableExams(int student_id, java.sql.Date currDate) throws SQLException, ClassNotFoundException {
 		PreparedStatement statement = initStatement("CALL ListAvailableExam(?, ?)");
 		statement.setInt(1, student_id);
-		statement.setDate(2, current_date);
+		statement.setDate(2, currDate);
 		return convertAll(statement.executeQuery());
 	}
 	
