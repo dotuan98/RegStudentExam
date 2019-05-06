@@ -77,6 +77,19 @@ BEGIN
     WHERE a.login = username AND a.password = pass;
 END //
 
+DROP PROCEDURE IF EXISTS `CheckStudentAttendancesOfModule` //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CheckStudentAttendancesOfModule`(IN student_id int, module_id int)
+BEGIN
+	select a.sesDate, a.sesFrom, a.sesTo, b.stuId
+    from   (select s.sesId, sesDate, sesFrom, sesTo
+			from session S
+			where s.modId = module_id) a
+			left join (  select se.sesID, se.sesDate, se.sesFrom, se.sesTo, s.stuId 
+						 from student s join sign si on (s.stuId = si.stuId)
+						 join session se on (si.sesId = se.sesId)
+						 where s.stuId = student_id and modId = module_id ) b on (a.sesId = b.sesId);
+END//
+
 DROP PROCEDURE IF EXISTS `ListAllLecturer` //
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ListAllLecturer`()
@@ -118,7 +131,7 @@ END //
 DROP PROCEDURE IF EXISTS `ListModulesOfStudent` //
 CREATE PROCEDURE ListModulesOfStudent(student_id int)
 BEGIN
-	select S.stuID, A.name as student_name, A.surname, M.name
+	select M.name
 	from module M
 		join enroll E on (E.modID = M.modID)
         join student S on (E.stuID = S.stuID)

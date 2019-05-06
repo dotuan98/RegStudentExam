@@ -7,7 +7,7 @@ BEGIN
 	truncate table ENROLL;
 	truncate table TEACH;
 	truncate table SIGN;
-	truncate table REG;	
+	truncate table REG;
 	truncate table EXAM;
 	truncate table SESSION;
 	truncate table MODULE;
@@ -128,6 +128,14 @@ insert into ENROLL(stuId, modId) values(10, 13);
 insert into ENROLL(stuId, modId) values(10, 14);
 insert into ENROLL(stuId, modId) values(10, 15);
 
+#test for student 1
+insert into ENROLL(stuId, modId) values(1, 4);
+insert into ENROLL(stuId, modId) values(1, 5);
+insert into ENROLL(stuId, modId) values(1, 6);
+insert into ENROLL(stuId, modId) values(1, 7);
+insert into ENROLL(stuId, modId) values(1, 8);
+insert into ENROLL(stuId, modId) values(1, 9);
+insert into ENROLL(stuId, modId) values(1, 10);
 
 
 #insert teach
@@ -150,17 +158,33 @@ insert into TEACH(accId, modId) values (14, 15);
 
 
 #insert session
-
+#module 1 has 10 sessions
 insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-01-01', '09:00:00', '12:00:00', 1); #1
 insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-01-01', '13:00:00', '16:00:00', 1); #2
 insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-01-02', '09:00:00', '12:00:00', 1);
 insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-01-02', '13:00:00', '16:00:00', 1);
 insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-01-03', '09:00:00', '12:00:00', 1);
 insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-01-03', '13:00:00', '16:00:00', 1);
-insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-01-01', '09:00:00', '12:00:00', 2);
-insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-01-01', '13:00:00', '16:00:00', 2);
-insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-01-02', '09:00:00', '12:00:00', 2);
-insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-01-02', '13:00:00', '16:00:00', 2);
+insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-01-04', '09:00:00', '12:00:00', 1);
+insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-01-04', '13:00:00', '16:00:00', 1);
+insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-01-05', '09:00:00', '12:00:00', 1);
+insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-01-05', '13:00:00', '16:00:00', 1);
+
+#module 2 has 12 sessions
+insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-02-01', '09:00:00', '12:00:00', 2);
+insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-02-01', '13:00:00', '16:00:00', 2);
+insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-02-02', '09:00:00', '12:00:00', 2);
+insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-02-02', '13:00:00', '16:00:00', 2);
+insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-02-03', '13:00:00', '16:00:00', 2);
+insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-02-04', '13:00:00', '16:00:00', 2);
+insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-02-05', '13:00:00', '16:00:00', 2);
+insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-02-06', '13:00:00', '16:00:00', 2);
+insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-02-07', '13:00:00', '16:00:00', 2);
+insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-02-08', '13:00:00', '16:00:00', 2);
+insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-02-09', '13:00:00', '16:00:00', 2);
+insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-02-10', '13:00:00', '16:00:00', 2);
+
+
 insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-02-01', '13:00:00', '16:00:00', 3);
 insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-02-02', '13:00:00', '16:00:00', 3);
 insert into SESSION(sesDate, sesFrom, sesTo, modId) values ('2018-03-02', '13:00:00', '16:00:00', 4);
@@ -188,6 +212,21 @@ insert into EXAM(deadline, examDate, examFrom, examTo, modId) values ('2018-05-1
 insert into EXAM(deadline, examDate, examFrom, examTo, modId) values ('2018-05-18', '2018-05-21', '09:00:00', '10:30:00', 13);
 insert into EXAM(deadline, examDate, examFrom, examTo, modId) values ('2018-05-18', '2018-05-21', '09:00:00', '10:30:00', 14);
 
+#inser test for studentId = 1
+
+#can not register
+insert into EXAM(deadline, examDate, examFrom, examTo, modId) values ('2019-05-05', '2018-05-10', '09:00:00', '10:30:00', 1);
+insert into EXAM(deadline, examDate, examFrom, examTo, modId) values ('2019-05-10', '2019-05-15', '09:00:00', '10:30:00', 2);
+#successfully register
+insert into EXAM(deadline, examDate, examFrom, examTo, modId) values ('2019-06-05', '2018-06-10', '09:00:00', '10:30:00', 3);
+insert into EXAM(deadline, examDate, examFrom, examTo, modId) values ('2019-06-10', '2019-06-15', '09:00:00', '10:30:00', 4);
+#can register
+insert into EXAM(deadline, examDate, examFrom, examTo, modId) values ('2019-05-15', '2018-05-20', '10:30:00', '12:00:00', 5);
+insert into EXAM(deadline, examDate, examFrom, examTo, modId) values ('2019-05-15', '2018-05-20', '13:00:00', '14:30:00', 6);
+insert into EXAM(deadline, examDate, examFrom, examTo, modId) values ('2019-06-05', '2018-06-10', '09:00:00', '11:00:00', 7);
+insert into EXAM(deadline, examDate, examFrom, examTo, modId) values ('2019-06-15', '2018-06-20', '13:00:00', '14:30:00', 8);
+
+/*
 
 #insert sign
 #insert into SIGN(sesId, stuId, signTime) values (1, 1, '09:00:00');
@@ -206,29 +245,92 @@ insert into SIGN(sesId, stuId, signTime) values (7, 5, '09:00:00');
 insert into SIGN(sesId, stuId, signTime) values (7, 6, '09:00:00');
 insert into SIGN(sesId, stuId, signTime) values (7, 7, '09:00:00');
 insert into SIGN(sesId, stuId, signTime) values (8, 8, '09:00:00');
-
-
-#insert sign
-/*
-insert into SIGN(sesId, stuId) values (1, 3);
-insert into SIGN(sesId, stuId) values (2, 3);
-insert into SIGN(sesId, stuId) values (1, 4);
-insert into SIGN(sesId, stuId) values (1, 5);
-insert into SIGN(sesId, stuId) values (1, 6);
-insert into SIGN(sesId, stuId) values (3, 3);
-insert into SIGN(sesId, stuId) values (4, 6);
-insert into SIGN(sesId, stuId) values (5, 7);
-insert into SIGN(sesId, stuId) values (6, 7);
-insert into SIGN(sesId, stuId) values (7, 3);
-insert into SIGN(sesId, stuId) values (7, 4);
-insert into SIGN(sesId, stuId) values (7, 5);
-insert into SIGN(sesId, stuId) values (7, 6);
-insert into SIGN(sesId, stuId) values (7, 7);
-insert into SIGN(sesId, stuId) values (8, 8);
 */
 
-#insert REG
+#insert sign
 
+
+#student 3 attends 80% of module 1
+
+
+insert into SIGN(sesId, stuId) values (1, 3);
+insert into SIGN(sesId, stuId) values (2, 3);
+insert into SIGN(sesId, stuId) values (3, 3);
+insert into SIGN(sesId, stuId) values (4, 3);
+insert into SIGN(sesId, stuId) values (5, 3);
+insert into SIGN(sesId, stuId) values (6, 3);
+insert into SIGN(sesId, stuId) values (7, 3);
+insert into SIGN(sesId, stuId) values (8, 3);
+
+#student 3 attends 100% of module 2
+insert into SIGN(sesId, stuId) values (11, 3);
+insert into SIGN(sesId, stuId) values (12, 3);
+insert into SIGN(sesId, stuId) values (13, 3);
+insert into SIGN(sesId, stuId) values (14, 3);
+insert into SIGN(sesId, stuId) values (15, 3);
+insert into SIGN(sesId, stuId) values (16, 3);
+insert into SIGN(sesId, stuId) values (17, 3);
+insert into SIGN(sesId, stuId) values (18, 3);
+insert into SIGN(sesId, stuId) values (19, 3);
+insert into SIGN(sesId, stuId) values (20, 3);
+insert into SIGN(sesId, stuId) values (21, 3);
+insert into SIGN(sesId, stuId) values (22, 3);
+insert into SIGN(sesId, stuId) values (23, 3);
+
+#student 4 attends 70% of module 1
+insert into SIGN(sesId, stuId) values (1, 4);
+insert into SIGN(sesId, stuId) values (2, 4);
+insert into SIGN(sesId, stuId) values (3, 4);
+insert into SIGN(sesId, stuId) values (4, 4);
+insert into SIGN(sesId, stuId) values (5, 4);
+insert into SIGN(sesId, stuId) values (6, 4);
+insert into SIGN(sesId, stuId) values (7, 4);
+
+#student 4 attends 80% of module 2
+insert into SIGN(sesId, stuId) values (11, 4);
+insert into SIGN(sesId, stuId) values (12, 4);
+insert into SIGN(sesId, stuId) values (13, 4);
+insert into SIGN(sesId, stuId) values (14, 4);
+insert into SIGN(sesId, stuId) values (15, 4);
+insert into SIGN(sesId, stuId) values (16, 4);
+insert into SIGN(sesId, stuId) values (17, 4);
+insert into SIGN(sesId, stuId) values (18, 4);
+insert into SIGN(sesId, stuId) values (19, 4);
+insert into SIGN(sesId, stuId) values (20, 4);
+insert into SIGN(sesId, stuId) values (21, 4);
+
+#student 5 attends 90% of module 1
+insert into SIGN(sesId, stuId) values (1, 5);
+insert into SIGN(sesId, stuId) values (2, 5);
+insert into SIGN(sesId, stuId) values (3, 5);
+insert into SIGN(sesId, stuId) values (4, 5);
+insert into SIGN(sesId, stuId) values (5, 5);
+insert into SIGN(sesId, stuId) values (6, 5);
+insert into SIGN(sesId, stuId) values (7, 5);
+insert into SIGN(sesId, stuId) values (8, 5);
+insert into SIGN(sesId, stuId) values (9, 5);
+
+#student 6 attends 100% of module 1
+insert into SIGN(sesId, stuId) values (1, 6);
+insert into SIGN(sesId, stuId) values (2, 6);
+insert into SIGN(sesId, stuId) values (3, 6);
+insert into SIGN(sesId, stuId) values (4, 6);
+insert into SIGN(sesId, stuId) values (5, 6);
+insert into SIGN(sesId, stuId) values (6, 6);
+insert into SIGN(sesId, stuId) values (7, 6);
+insert into SIGN(sesId, stuId) values (8, 6);
+insert into SIGN(sesId, stuId) values (9, 6);
+insert into SIGN(sesId, stuId) values (10, 6);
+
+
+
+insert into SIGN(sesId, stuId) values (5, 7);
+insert into SIGN(sesId, stuId) values (6, 7);
+insert into SIGN(sesId, stuId) values (7, 7);
+insert into SIGN(sesId, stuId) values (8, 8);
+
+/*
+#insert REG
 insert into REG(examId, stuId, regDate) values(1, 3, '2018-05-20');
 insert into REG(examId, stuId, regDate) values(1, 4, '2018-05-20');
 insert into REG(examId, stuId, regDate) values(1, 5, '2018-05-20');
@@ -240,9 +342,11 @@ insert into REG(examId, stuId, regDate) values(7, 7, '2018-05-23');
 insert into REG(examId, stuId, regDate) values(8, 8, '2018-05-24');
 insert into REG(examId, stuId, regDate) values(9, 9, '2018-05-25');
 insert into REG(examId, stuId, regDate) values(10, 10, '2018-05-26');
+*/
+
 
 #insert REG
-/*
+
 insert into REG(examId, stuId) values(1, 3);
 insert into REG(examId, stuId) values(1, 4);
 insert into REG(examId, stuId) values(1, 5);
@@ -254,6 +358,7 @@ insert into REG(examId, stuId) values(7, 7);
 insert into REG(examId, stuId) values(8, 8);
 insert into REG(examId, stuId) values(9, 9);
 insert into REG(examId, stuId) values(10, 10);
-*/
+insert into REG(examId, stuId) values(18, 1);
+insert into REG(examId, stuId) values(19, 1);
 end//
 call InitializeInstances()//
