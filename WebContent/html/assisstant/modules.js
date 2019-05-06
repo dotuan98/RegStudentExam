@@ -1,14 +1,19 @@
 $(function(){
-    var $enrolledModules = $('#enrolled-modules');
-    //$enrolledModules.append('<li>123</li>');
-    
+    var $modulesTable = $('#modules-table');
     
     $.ajax({
         type: 'GET',
-        url:'/RegStudentExam/view/accounts',
+        url:'/RegStudentExam/view/list_all_modules',
         success: function(modules) {
             $.each(modules, function(i, module) {
-                $enrolledModules.append('<li>' + module.name + '</li>');
+                $modulesTable.append('<tr>'
+                		+ '<td>' + module.modId + '</td>'
+                		+ '<td>' + module.name + '</td>'
+                		+ '<td>' + module.code + '</td>'
+                		+ '<td>' + module.semId + '</td>'
+                		+ '<td><form method="post" action="/RegStudentExam/view/delete_module/'
+                		+ module.modId + '"><button type="submit">Delete</button></form></td>'
+                		+ '</tr>');
             });
         }
     });

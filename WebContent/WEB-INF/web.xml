@@ -17,6 +17,7 @@
     <servlet-mapping>
         <servlet-name>StaticFileServlet</servlet-name>
         <url-pattern>/html/*</url-pattern>
+        <url-pattern>/css/*</url-pattern>
     </servlet-mapping>
   
   <servlet>

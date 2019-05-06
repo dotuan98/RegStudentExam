@@ -14,4 +14,23 @@ public class Module {
         statement.setInt(1, student_id);
         return ResultsetConverter.convertAll(statement.executeQuery());
     }
+    
+    public static JSONArray listAllModules() throws SQLException, ClassNotFoundException{
+        PreparedStatement statement = initStatement("call ListAllModules()");
+        return ResultsetConverter.convertAll(statement.executeQuery());
+    }
+    
+    public static void addModule(String moduleName, String moduleCode, int semesterId) throws SQLException, ClassNotFoundException {
+        PreparedStatement statement = initStatement("CALL AddModule(?, ?, ?)");
+        statement.setString(1, moduleName);
+        statement.setString(2, moduleCode);
+        statement.setInt(3, semesterId);
+        statement.executeQuery();
+    }
+    
+    public static void deleteModule(int moduleId) throws SQLException, ClassNotFoundException {
+        PreparedStatement statement = initStatement("CALL DeleteModule(?)");
+        statement.setInt(1, moduleId);
+        statement.executeQuery();
+    }   
 }
