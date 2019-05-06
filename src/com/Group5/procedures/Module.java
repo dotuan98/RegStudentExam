@@ -20,7 +20,7 @@ public class Module {
 		statement.executeQuery();
 	}
 
-	// Get a Module ---------CONSIDER TO DELETE-------
+	// Get a Module --- CONSIDER TO DELETE ------
 	public static JSONObject getModule(int mod_id) throws SQLException, ClassNotFoundException {
 		PreparedStatement statement = initStatement("CALL GetModule(?)");
 		statement.setInt(1, mod_id);
@@ -65,9 +65,9 @@ public class Module {
 		statement.executeQuery();
 	}
 
-	// Remove a lecturer of a module
-	public static void removeLecturerOfModule(int lec_id, int mod_id) throws SQLException, ClassNotFoundException {
-		PreparedStatement statement = initStatement("CALL RemoveLecturerOfModule(?, ?)");
+	// delete a lecturer of a module
+	public static void deleteLecturerOfModule(int lec_id, int mod_id) throws SQLException, ClassNotFoundException {
+		PreparedStatement statement = initStatement("CALL DeleteLecturerOfModule(?, ?)");
 		statement.setInt(1, lec_id);
 		statement.setInt(2, mod_id);
 		statement.executeQuery();
