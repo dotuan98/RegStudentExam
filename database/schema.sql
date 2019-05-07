@@ -1,5 +1,5 @@
 use vgu1;
-
+/*
 drop table ASSISSTANT;
 drop table ENROLL;
 drop table TEACH;
@@ -12,7 +12,7 @@ drop table SEMESTER;
 drop table LECTURER;
 drop table STUDENT;
 drop table ACCOUNT;
-
+*/
 
 
 create table ACCOUNT (

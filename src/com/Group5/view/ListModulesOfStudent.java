@@ -19,7 +19,7 @@ public class ListModulesOfStudent {
 
 	@GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response doPost() throws SQLException, ClassNotFoundException {
+    public Response doGet() throws SQLException, ClassNotFoundException {
         JSONArray modules = Module.listModulesOfStudent(1);
         return Response.ok(modules.toString()).build();
     }

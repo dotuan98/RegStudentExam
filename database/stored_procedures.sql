@@ -275,7 +275,7 @@ DROP PROCEDURE IF EXISTS ListAvailableExams //
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ListAvailableExams`(IN student_id int, IN currDate date)
 BEGIN
 	select m.name, ex.examId, ex.deadline, ex.examDate, ex.examFrom, ex.examTo, m.modId
-    from studentListCancellableExams s 
+    from student s 
     join enroll e on (s.stuId = e.stuId) 
     join module m on (e.modId = m.modId) 
     join exam ex on (m.modId = ex.modId)
@@ -353,7 +353,6 @@ BEGIN
         M.semId = sem_id
     WHERE M.modId = module_id;
 END //
-CALL ModifyModule("HUVILO", "HU", 1, 15)//
 
 
 DROP PROCEDURE IF EXISTS `ModifySemester` //
