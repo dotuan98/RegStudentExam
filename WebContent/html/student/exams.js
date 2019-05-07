@@ -8,7 +8,7 @@ $(function(){
             $.each(exams, function(i, exam) {
                 $registrable_exams.append('<tr>'
                 		+ '<td>' + exam.examId + '</td>'
-                		+ '<td>' + exam.name + '</td>'
+                		+ '<td>' + exam.name + " " + exam.modId + '</td>'		//module name not exam name
                 		+ '<td>' + exam.examDate + '</td>'
                 		+ '<td>' + exam.deadline + '</td>'
                 		+ '<td>'
@@ -32,7 +32,7 @@ $(function(){
             $.each(exams, function(i, exam) {
                 $cancellable_exams.append('<tr>'
                 		+ '<td>' + exam.examId + '</td>'
-                		+ '<td>' + exam.name + '</td>'
+                		+ '<td>' + exam.name + " " + exam.modId + '</td>'
                 		+ '<td>' + exam.examDate + '</td>'
                 		+ '<td>' + exam.deadline + '</td>'
                 		+ '<td>'

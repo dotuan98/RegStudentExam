@@ -2,6 +2,7 @@ package com.Group5.procedures;
 
 import static com.Group5.procedures.ResultsetConverter.*;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.json.JSONArray;
@@ -23,9 +24,11 @@ public class Module {
 
 	// Get a Module --- CONSIDER TO DELETE ------
 	public static JSONObject getModule(int mod_id) throws SQLException, ClassNotFoundException {
-		PreparedStatement statement = initStatement("CALL GetModule(?)");
+		PreparedStatement statement = initStatement("CALL ListModule(?)");
 		statement.setInt(1, mod_id);
-		return convertOne(statement.executeQuery());
+		ResultSet selectedModule = statement.executeQuery();
+		selectedModule.next();
+		return ResultsetConverter.convertOne(selectedModule);
 	}
 
 	// ------------------ Student - Modules ------------------

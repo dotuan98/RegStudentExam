@@ -23,7 +23,7 @@ $(function(){
         	)
         	.then((array) => {
         		for (let i = 0; i < array.length; i++) {
-        			$enrolledModules.append('<li>'+ array[i].module.name +'</li>');
+        			$enrolledModules.append('<li>'+ array[i].module.name + " (module ID: " + array[i].module.modId +')</li>');
         	
         			for (let j = 0; j < array[i].sessions.length; j++) {
         				$enrolledModules.append(array[i].sessions[j].sesDate + ": "

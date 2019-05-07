@@ -20,7 +20,7 @@ public class ListAvailableExams {
 
 	@GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response doPost() throws SQLException, ClassNotFoundException {
+    public Response doGet() throws SQLException, ClassNotFoundException {
         JSONArray exams = Exam.listAvailableExams(1, new java.sql.Date(new java.util.Date().getTime()));
         return Response.ok(exams.toString()).build();
     }

@@ -184,6 +184,7 @@ BEGIN
 	SELECT M.modId,
            M.code,
            M.name,
+           M.semId,
            semFrom,
            semTo,
            CONCAT(A.name, ' ', A.surname) AS 'lecturer',
@@ -191,7 +192,7 @@ BEGIN
     FROM MODULE M
              JOIN semester S on M.semId = S.semId
              JOIN teach T on M.modId = T.modId
-             JOIN lecturer L on T.lecId = L.lecId
+             JOIN lecturer L on T.accId = L.accId
              JOIN account A on L.accId = A.accId
     WHERE M.modId = module_id;
 END //
@@ -240,20 +241,52 @@ BEGIN
 END //
 
 
-DROP PROCEDURE IF EXISTS `ListAvailableExams` //
+#--- List Available exam
+SET GLOBAL log_bin_trust_function_creators = 1;//
+DROP FUNCTION IF EXISTS count_attendances //
+CREATE FUNCTION count_attendances(student_id INT,  module_id INT) RETURNS INT
+BEGIN
+    SET @result = 0;
+    SELECT 
+		COUNT(*) INTO @result
+	FROM sign S
+    JOIN session SE ON (S.sesId = SE.sesId)
+    JOIN module M ON (SE.modId = M.modId)
+    WHERE S.stuId = student_id AND M.modId = module_id;
+    RETURN @result;
+END //
+DROP FUNCTION IF EXISTS percent_attendances //
+CREATE FUNCTION percent_attendances(student_id INT, module_id INT)
+    RETURNS FLOAT(3, 2)
+BEGIN
+    SET @count = count_attendances(student_id, module_id);
 
+    set @total = 0;
+    SELECT 
+		COUNT(*) INTO @total
+    FROM session S
+    WHERE S.modId = module_id;
+
+    RETURN CAST(@count AS DECIMAL) / CAST(@total AS DECIMAL);
+END //
+
+DROP PROCEDURE IF EXISTS ListAvailableExams //
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ListAvailableExams`(IN student_id int, IN currDate date)
 BEGIN
-	select m.name, ex.examId, ex.deadline, ex.examDate, ex.examFrom, ex.examTo
-    from student s 
+	select m.name, ex.examId, ex.deadline, ex.examDate, ex.examFrom, ex.examTo, m.modId
+    from studentListCancellableExams s 
     join enroll e on (s.stuId = e.stuId) 
     join module m on (e.modId = m.modId) 
     join exam ex on (m.modId = ex.modId)
-    where s.stuId = student_id and currDate < ex.deadline and ex.examId not in(
+    where s.stuId = student_id and currDate < ex.deadline 
+    and percent_attendances(student_id, m.modId) >= 0.80 
+    and ex.examId not in(
 		select examId
-        from reg
-        );
+       from reg
+    )
+    ;
+    
 END//
 
 
@@ -465,7 +498,7 @@ END //
 DROP PROCEDURE IF EXISTS `ListCancellableExams` //
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ListCancellableExams`(IN student_id int)
 BEGIN
-	select m.name, ex.examID, ex.deadline, ex.examDate, ex.examFrom, ex.examTo
+	select m.name, ex.examID, ex.deadline, ex.examDate, ex.examFrom, ex.examTo, ex.modId
     from student s join enroll e on ( s.stuId=e.stuId) 
     join module m on ( e.modId = m.modId) 
     join exam ex on ( ex.modId = m.modId)

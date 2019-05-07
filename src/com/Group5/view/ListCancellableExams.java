@@ -20,7 +20,7 @@ public class ListCancellableExams {
 
 	@GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response doPost() throws SQLException, ClassNotFoundException {
+    public Response doGet() throws SQLException, ClassNotFoundException {
         JSONArray exams = Exam.listCancellableExams(1);
         return Response.ok(exams.toString()).build();
     }
